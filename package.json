@@ -19,7 +19,9 @@
   },
   "devDependencies": {
     "node-sass-chokidar": "^1.2.2",
+    "normalize.css": "^8.0.0",
     "npm-run-all": "^4.1.2",
-    "sass-mq": "^4.0.2"
+    "sass-mq": "^4.0.2",
+    "susy": "^3.0.5"
   }
 }
