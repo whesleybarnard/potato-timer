@@ -3,11 +3,19 @@
 @import "node_modules/susy/sass/plugins/svg-grid";
 
 // /home/administrator/batcave/react/potato-timer/node_modules/normalize.css/normalize.css
-@import "node_modules/normalize.css/normalize";
+// @import "node_modules/normalize.css/normalize";
+
+// /home/administrator/batcave/react/potato-timer/node_modules/sass-mq/_mq.scss
+@import "node_modules/sass-mq/mq";
 
 $susy: (
   "columns": susy-repeat(8),
-  "gutters": 0.1,
+  /* "gutters": 0.1,*/ "gutters": 25px
+);
+
+$susy2: (
+  "columns": susy-repeat(8),
+  "gutters": 0
 );
 
 /* =================== */
@@ -23,8 +31,14 @@ $debug: false;
 @debug susy-settings();
 /* =================== */
 
+body {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
 .grid {
   background: susy-svg-grid() no-repeat scroll;
+  margin-bottom: 20px;
 
   &:after {
     content: " ";
@@ -35,9 +49,9 @@ $debug: false;
 
 .grid-item {
   float: left;
-  width: span(3);
+  width: span(2);
   margin-right: gutter();
-  height: 100px;
+  height: 200px;
   border: solid 1px red;
 
   box-sizing: border-box;
@@ -45,6 +59,66 @@ $debug: false;
   &:last-child {
     margin-right: 0;
     // width: span(2);
+  }
+}
+
+.inner-grid {
+  background: susy-svg-grid(
+      $colors: (rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.25))
+    )
+    no-repeat scroll;
+
+  &:after {
+    content: " ";
+    clear: both;
+    display: block;
+  }
+}
+
+$my-blue: blue;
+$my-blue-mix: lighten($my-blue, 30);
+
+.inner-grid-item {
+  float: left;
+  height: 100px;
+  width: span(2);
+  box-sizing: border-box;
+  margin-right: gutter();
+
+  &:nth-child(2) {
+    background-color: green;
+  }
+  &:nth-child(3) {
+    background-color: $my-blue-mix;
+  }
+}
+
+.grid2 {
+  background: susy-svg-grid(
+      $grid: $susy2,
+      $colors: (rgba(0, 183, 255, 0.5), rgba(0, 183, 255, 0.25))
+    )
+    no-repeat scroll;
+  // min-height: 50px;
+  // height: 200px;
+
+  &:after {
+    content: " ";
+    clear: both;
+    display: block;
+  }
+}
+
+.grid2-item {
+  float: left;
+  height: 100px;
+  box-sizing: border-box;
+  border: solid 1px green;
+  width: span(2, $config: $susy2);
+
+  @include mq($from: desktop) {
+    color: #543675;
+    width: span(1, $config: $susy2);
   }
 }
 
@@ -66,11 +140,3 @@ $debug: false;
 }
 
 /* -------------------- */
-/* -------------------- */
-
-.my-div {
-  height: 50px;
-
-  // @extend .span-6;
-  // @include span-6;
-}
