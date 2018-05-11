@@ -1,142 +1,67 @@
-// /home/administrator/batcave/react/potato-timer/node_modules/susy/sass/_susy.scss
 @import "node_modules/susy/sass/susy";
 @import "node_modules/susy/sass/plugins/svg-grid";
-
-// /home/administrator/batcave/react/potato-timer/node_modules/normalize.css/normalize.css
-// @import "node_modules/normalize.css/normalize";
-
-// /home/administrator/batcave/react/potato-timer/node_modules/sass-mq/_mq.scss
+@import "node_modules/normalize.css/normalize";
+@import "node_modules/open-color/open-color.scss";
 @import "node_modules/sass-mq/mq";
 
 $susy: (
-  "columns": susy-repeat(8),
-  /* "gutters": 0.1,*/ "gutters": 25px
-);
-
-$susy2: (
-  "columns": susy-repeat(8),
+  "columns": susy-repeat(12),
   "gutters": 0
 );
 
-/* =================== */
-$debug: false;
-@if ($debug) {
-  // visualizing layout internals
-  * {
-    border: 1px dotted red;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-// @debug $susy;
-@debug susy-settings();
-/* =================== */
-
+html,
 body {
-  max-width: 75rem;
-  margin: 0 auto;
+  // min-height: 100vh;
+  height: 100%;
 }
 
-.grid {
+.app-header {
+  // min-height: 10vh;
+  // height: 10vh;
+  background-color: $oc-cyan-5;
+  text-align: center;
+  padding: 50px;
+}
+
+.app-body {
+  // height: 90vh;
+  // min-height: 90vh;
+  background-color: $oc-gray-5;
   background: susy-svg-grid() no-repeat scroll;
-  margin-bottom: 20px;
 
-  &:after {
+  &::after {
     content: " ";
     clear: both;
     display: block;
   }
 }
 
-.grid-item {
-  float: left;
-  width: span(2);
-  margin-right: gutter();
-  height: 200px;
-  border: solid 1px red;
+.app-main {
+  background-color: $oc-gray-3;
+  text-align: center;
+  padding: 50px;
 
-  box-sizing: border-box;
-
-  &:last-child {
-    margin-right: 0;
-    // width: span(2);
+  @include mq(desktop) {
+    width: span(10);
+    float: left;
+    min-height: 100%;
   }
 }
 
-.inner-grid {
-  background: susy-svg-grid(
-      $colors: (rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.25))
-    )
-    no-repeat scroll;
+.app-aside {
+  background-color: $oc-gray-6;
+  text-align: center;
+  padding: 50px;
 
-  &:after {
-    content: " ";
-    clear: both;
-    display: block;
+  @include mq(desktop) {
+    width: span(2);
+    float: left;
+    min-height: 100%;
   }
 }
-
-$my-blue: blue;
-$my-blue-mix: lighten($my-blue, 30);
-
-.inner-grid-item {
-  float: left;
-  height: 100px;
-  width: span(2);
-  box-sizing: border-box;
-  margin-right: gutter();
-
-  &:nth-child(2) {
-    background-color: green;
-  }
-  &:nth-child(3) {
-    background-color: $my-blue-mix;
-  }
-}
-
-.grid2 {
-  background: susy-svg-grid(
-      $grid: $susy2,
-      $colors: (rgba(0, 183, 255, 0.5), rgba(0, 183, 255, 0.25))
-    )
-    no-repeat scroll;
-  // min-height: 50px;
-  // height: 200px;
-
-  &:after {
-    content: " ";
-    clear: both;
-    display: block;
-  }
-}
-
-.grid2-item {
-  float: left;
-  height: 100px;
-  box-sizing: border-box;
-  border: solid 1px green;
-  width: span(2, $config: $susy2);
-
-  @include mq($from: desktop) {
-    color: #543675;
-    width: span(1, $config: $susy2);
-  }
-}
-
-/* -------------------- */
-
-.span {
-  float: left;
-  margin-right: gutter();
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-@for $span from 1 through length(susy-get("columns")) {
-  .span-#{$span} {
-    width: span($span);
-  }
-}
-
-/* -------------------- */
